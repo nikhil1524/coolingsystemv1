@@ -9,6 +9,9 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Text;
 
+import com.yeshtech.coolingsystem.util.LabelConstants;
+import com.yeshtech.coolingsystem.util.PropertiesLoader;
+
 public class DataCenterLayoutWindow {
 
 	protected Shell shell;
@@ -46,19 +49,21 @@ public class DataCenterLayoutWindow {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
+		PropertiesLoader loader = PropertiesLoader
+				.getPropertiesLoader("com.yeshtech.coolingsystem.util.layout-label");
 		shell = new Shell();
 		shell.setSize(453, 281);
-		shell.setText("Data Center Layout");
+		shell.setText(loader.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_WINDOW));
 		
 		Group grpRowNumber = new Group(shell, SWT.NONE);
-		grpRowNumber.setText("Row Number");
+		grpRowNumber.setText(loader.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_ROW_NUMBER));
 		grpRowNumber.setBounds(10, 10, 414, 56);
 		
 		Combo cmbRowNumber = new Combo(grpRowNumber, SWT.NONE);
 		cmbRowNumber.setBounds(10, 23, 394, 23);
 		
 		Group grpRackSpecification = new Group(shell, SWT.NONE);
-		grpRackSpecification.setText("Rack Specification");
+		grpRackSpecification.setText(loader.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_RACK_SPECIFICATION));
 		grpRackSpecification.setBounds(10, 72, 414, 56);
 		
 		Combo cmbRackSpecification = new Combo(grpRackSpecification, SWT.NONE);
@@ -66,30 +71,30 @@ public class DataCenterLayoutWindow {
 		
 		Button btnEditRack = new Button(grpRackSpecification, SWT.NONE);
 		btnEditRack.setBounds(180, 23, 75, 25);
-		btnEditRack.setText("Edit Rack");
+		btnEditRack.setText(loader.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_EDIT_RACK));
 		
 		Button btnDeleteRack = new Button(grpRackSpecification, SWT.NONE);
 		btnDeleteRack.setBounds(259, 23, 66, 25);
-		btnDeleteRack.setText("Delete");
+		btnDeleteRack.setText(loader.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_DELETE_RACK));
 		
 		Button btnNewRack = new Button(grpRackSpecification, SWT.NONE);
 		btnNewRack.setBounds(329, 23, 75, 25);
-		btnNewRack.setText("New Rack");
+		btnNewRack.setText(loader.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_NEW_RACK));
 		
 		Label lblSupplyHeadIndex = new Label(shell, SWT.NONE);
 		lblSupplyHeadIndex.setBounds(10, 147, 167, 15);
-		lblSupplyHeadIndex.setText("Supply heat index value ( SHI ) : ");
+		lblSupplyHeadIndex.setText(loader.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_SUPPLY_HEAT_INDEX));
 		
 		txtSupplyHeatIndex = new Text(shell, SWT.BORDER);
 		txtSupplyHeatIndex.setBounds(183, 144, 76, 21);
 		
 		Button btnCancel = new Button(shell, SWT.NONE);
 		btnCancel.setBounds(25, 188, 92, 37);
-		btnCancel.setText("Cancel");
+		btnCancel.setText(loader.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_CANCEL));
 		
 		Button btnSave = new Button(shell, SWT.NONE);
 		btnSave.setBounds(322, 191, 99, 32);
-		btnSave.setText("Save");
+		btnSave.setText(loader.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_SAVE));
 
 	}
 }

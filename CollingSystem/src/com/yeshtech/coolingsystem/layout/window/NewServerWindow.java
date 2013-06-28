@@ -7,6 +7,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 
+import com.yeshtech.coolingsystem.util.LabelConstants;
+import com.yeshtech.coolingsystem.util.PropertiesLoader;
+
 public class NewServerWindow {
 
 	protected Shell shell;
@@ -46,21 +49,23 @@ public class NewServerWindow {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
+		PropertiesLoader loader = PropertiesLoader
+				.getPropertiesLoader("com.yeshtech.coolingsystem.util.layout-label");
 		shell = new Shell();
 		shell.setSize(421, 243);
-		shell.setText("New Server");
+		shell.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW));
 		
 		Label lblServerName = new Label(shell, SWT.NONE);
 		lblServerName.setBounds(28, 18, 86, 15);
-		lblServerName.setText("Server Name : ");
+		lblServerName.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_SERVER_NAME));
 		
 		Label lblHeatOutput = new Label(shell, SWT.NONE);
 		lblHeatOutput.setBounds(28, 54, 86, 15);
-		lblHeatOutput.setText("Heat Output : ");
+		lblHeatOutput.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_HEAT_OUTPUT));
 		
 		Label lblThermalResistance = new Label(shell, SWT.NONE);
 		lblThermalResistance.setBounds(28, 93, 121, 15);
-		lblThermalResistance.setText("Thermal Resistance : ");
+		lblThermalResistance.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_THERMAL_RESISTANCE));
 		
 		txtServerName = new Text(shell, SWT.BORDER);
 		txtServerName.setBounds(167, 16, 181, 21);
@@ -73,19 +78,19 @@ public class NewServerWindow {
 		
 		Button btnCancel = new Button(shell, SWT.NONE);
 		btnCancel.setBounds(28, 140, 121, 43);
-		btnCancel.setText("Cancel");
+		btnCancel.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_CANCEL));
 		
 		Button btnSave = new Button(shell, SWT.NONE);
 		btnSave.setBounds(247, 142, 121, 40);
-		btnSave.setText("Save");
+		btnSave.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_SAVE));
 		
 		Label lblW = new Label(shell, SWT.NONE);
 		lblW.setBounds(354, 57, 27, 15);
-		lblW.setText("W");
+		lblW.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_W));
 		
 		Label lblKw = new Label(shell, SWT.NONE);
 		lblKw.setBounds(355, 93, 33, 15);
-		lblKw.setText("K/W");
+		lblKw.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_K_W));
 
 	}
 

@@ -7,6 +7,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.yeshtech.coolingsystem.util.LabelConstants;
+import com.yeshtech.coolingsystem.util.PropertiesLoader;
+
 public class RunWindow {
 
 	protected Shell shell;
@@ -45,29 +48,32 @@ public class RunWindow {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
+		PropertiesLoader loader = PropertiesLoader
+				.getPropertiesLoader("com.yeshtech.coolingsystem.util.layout-label");
+		
 		shell = new Shell();
 		shell.setSize(389, 261);
-		shell.setText("SWT Application");
+		shell.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW));
 		
 		Button chkPreprocessOnly = new Button(shell, SWT.CHECK);
 		chkPreprocessOnly.setBounds(20, 20, 129, 16);
-		chkPreprocessOnly.setText("Preprocess Only");
+		chkPreprocessOnly.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_PREPROCESS_ONLY));
 		
 		Label lblInputDeckFileName = new Label(shell, SWT.NONE);
 		lblInputDeckFileName.setBounds(20, 56, 129, 15);
-		lblInputDeckFileName.setText("Input deck filename :");
+		lblInputDeckFileName.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_INPUT_DECK_FILENAME));
 		
 		Label lblOutputResults = new Label(shell, SWT.NONE);
 		lblOutputResults.setBounds(20, 90, 133, 15);
-		lblOutputResults.setText("Output results filename :");
+		lblOutputResults.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_OUTPUT_RESULTS_FILENAME));
 		
 		Button btnGo = new Button(shell, SWT.NONE);
 		btnGo.setBounds(21, 123, 335, 46);
-		btnGo.setText("Go !");
+		btnGo.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_GO));
 		
 		Button btnClose = new Button(shell, SWT.NONE);
 		btnClose.setBounds(20, 183, 93, 25);
-		btnClose.setText("Close");
+		btnClose.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_CLOSE));
 		
 		txtInputDeckFileName = new Text(shell, SWT.BORDER);
 		txtInputDeckFileName.setBounds(159, 53, 197, 21);
