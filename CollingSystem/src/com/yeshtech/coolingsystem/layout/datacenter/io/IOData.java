@@ -1,4 +1,4 @@
-package com.yeshtech.coolingsystem.layout.io;
+package com.yeshtech.coolingsystem.layout.datacenter.io;
 
 import java.io.Serializable;
 

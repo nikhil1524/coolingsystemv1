@@ -106,9 +106,9 @@ public class PostprocessingWindow {
 		label_1.setText(loader.getValue(LabelConstants.LAYOUT_POST_PROCESSING_WINDOW_COMPONENT_TYPE));
 		label_1.setBounds(157, 27, 66, 34);
 		
-		Label label_2 = new Label(composite_2, SWT.WRAP);
-		label_2.setText(loader.getValue(LabelConstants.LAYOUT_POST_PROCESSING_WINDOW_EXERGY_DESTRUCTION));
-		label_2.setBounds(259, 27, 103, 24);
+		Label lblExergyDestruction = new Label(composite_2, SWT.WRAP);
+		lblExergyDestruction.setText("Exergy Destruction,");
+		lblExergyDestruction.setBounds(259, 27, 103, 24);
 		
 		Label label_3 = new Label(composite_2, SWT.NONE);
 		label_3.setText("2e-4");
@@ -123,8 +123,8 @@ public class PostprocessingWindow {
 		label_5.setBounds(49, 67, 55, 15);
 		
 		Label lblw = new Label(composite_2, SWT.NONE);
-		lblw.setBounds(360, 27, 55, 15);
-		lblw.setText(",W");
+		lblw.setBounds(362, 27, 55, 15);
+		lblw.setText("W");
 		
 		CTabItem tbtmDesignParameter = new CTabItem(tabFolder, SWT.NONE);
 		tbtmDesignParameter.setText(loader.getValue(LabelConstants.LAYOUT_POST_PROCESSING_WINDOW_DESIGN_PARAMETERS));

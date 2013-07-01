@@ -8,10 +8,15 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 
+import com.yeshtech.coolingsystem.layout.datacenter.fans.FansServerInterface;
+import com.yeshtech.coolingsystem.util.Constants;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 
-public class NewFanWindow {
+public class NewFanWindow implements SelectionListener{
 
 	protected Shell shell;
 	private Text txtFanName;
@@ -31,7 +36,8 @@ public class NewFanWindow {
 	private Text txtFanCurveA;
 	private Text txtFanCurveB;
 	private Text txtFanCurveAlpha;
-
+	private FansServerInterface fansServerInterface;
+	private Button btnSave;
 	/**
 	 * Launch the application.
 	 * @param args
@@ -58,6 +64,11 @@ public class NewFanWindow {
 				display.sleep();
 			}
 		}
+	}
+	
+	public void setFansServerInterface(FansServerInterface serverInterface)
+	{
+		this.fansServerInterface = serverInterface;
 	}
 
 	/**
@@ -99,9 +110,11 @@ public class NewFanWindow {
 		lblEfficiency.setText(loader.getValue(LabelConstants.LAYOUT_NEW_FAN_WINDOW_FIXED_FLOW_FAN_EFFICIENCY));
 		
 		txtFixedFlowFlowRate = new Text(grpFixedFlowPan, SWT.BORDER);
+		txtFixedFlowFlowRate.setText(Constants.DBL_ONE_POINT_ZER0);
 		txtFixedFlowFlowRate.setBounds(93, 21, 63, 21);
 		
 		txtFixedFlowEfficiency = new Text(grpFixedFlowPan, SWT.BORDER);
+		txtFixedFlowEfficiency.setText(Constants.DBL_ZERO_POINT_EIGHT);
 		txtFixedFlowEfficiency.setBounds(93, 60, 109, 21);
 		
 		Label lblM3S = new Label(grpFixedFlowPan, SWT.NONE);
@@ -113,7 +126,7 @@ public class NewFanWindow {
 		grpFixedPressureRise.setBounds(10, 301, 209, 115);
 		
 		Label lblNewLabel_3 = new Label(grpFixedPressureRise, SWT.NONE);
-		lblNewLabel_3.setBounds(10, 34, 90, 15);
+		lblNewLabel_3.setBounds(10, 34, 76, 15);
 		lblNewLabel_3.setText(loader.getValue(LabelConstants.LAYOUT_NEW_FAN_WINDOW_FIXED_PRESSURE_RISE_FAN_PRESSURE_RISE));
 		
 		Label lblNewLabel_4 = new Label(grpFixedPressureRise, SWT.NONE);
@@ -121,9 +134,11 @@ public class NewFanWindow {
 		lblNewLabel_4.setText(loader.getValue(LabelConstants.LAYOUT_NEW_FAN_WINDOW_FIXED_PRESSURE_RISE_FAN_EFFICIENCY));
 		
 		txtFixedPressureRisePressureRate = new Text(grpFixedPressureRise, SWT.BORDER);
+		txtFixedPressureRisePressureRate.setText(Constants.DBL_ONE_POINT_ZER0);
 		txtFixedPressureRisePressureRate.setBounds(92, 32, 63, 21);
 		
 		txtFixedPressureEfficiency = new Text(grpFixedPressureRise, SWT.BORDER);
+		txtFixedPressureEfficiency.setText(Constants.DBL_ZERO_POINT_EIGHT);
 		txtFixedPressureEfficiency.setBounds(92, 70, 107, 21);
 		
 		Label lblPa = new Label(grpFixedPressureRise, SWT.NONE);
@@ -166,21 +181,27 @@ public class NewFanWindow {
 		txtFanCurveName.setBounds(139, 25, 113, 21);
 		
 		txtRefFlowHead = new Text(grpFanCurveData, SWT.BORDER);
+		txtRefFlowHead.setText(Constants.INT_TEN);
 		txtRefFlowHead.setBounds(139, 54, 68, 21);
 		
 		txtRefFlowrate = new Text(grpFanCurveData, SWT.BORDER);
+		txtRefFlowrate.setText(Constants.DBL_ZERO_POINT_ZERO_FIVE);
 		txtRefFlowrate.setBounds(139, 80, 68, 21);
 		
 		txtStagFlowHead = new Text(grpFanCurveData, SWT.BORDER);
+		txtStagFlowHead.setText(Constants.INT_FIFTEEN);
 		txtStagFlowHead.setBounds(139, 107, 68, 21);
 		
 		txtRefFanspeed = new Text(grpFanCurveData, SWT.BORDER);
+		txtRefFanspeed.setText(Constants.INT_THOUSAND);
 		txtRefFanspeed.setBounds(139, 134, 68, 21);
 		
 		txtMaxFanspeed = new Text(grpFanCurveData, SWT.BORDER);
+		txtMaxFanspeed.setText(Constants.INT_THOUSAND);
 		txtMaxFanspeed.setBounds(139, 161, 68, 21);
 		
 		txtMaxEfficiency = new Text(grpFanCurveData, SWT.BORDER);
+		txtMaxEfficiency.setText(Constants.DBL_ZERO_POINT_NINE);
 		txtMaxEfficiency.setBounds(139, 189, 68, 21);
 		
 		Label lblFanCurveEfficiencyParam = new Label(grpFanCurveData, SWT.NONE);
@@ -208,18 +229,23 @@ public class NewFanWindow {
 		lblB.setText(loader.getValue(LabelConstants.LAYOUT_NEW_FAN_WINDOW_FAN_CURVE_DATA_B));
 		
 		txtFanCurveQuatc = new Text(grpFanCurveData, SWT.BORDER);
+		txtFanCurveQuatc.setText(Constants.DBL_ZERO_POINT_FIVE);
 		txtFanCurveQuatc.setBounds(89, 285, 104, 21);
 		
 		txtFanCurveHhatc = new Text(grpFanCurveData, SWT.BORDER);
+		txtFanCurveHhatc.setText(Constants.DBL_ZERO_POINT_SEVENTY_FIVE);
 		txtFanCurveHhatc.setBounds(89, 314, 104, 21);
 		
 		txtFanCurveA = new Text(grpFanCurveData, SWT.BORDER);
+		txtFanCurveA.setText(Constants.DBL_ONE_POINT_ZER0);
 		txtFanCurveA.setBounds(89, 342, 104, 21);
 		
 		txtFanCurveB = new Text(grpFanCurveData, SWT.BORDER);
+		txtFanCurveB.setText(Constants.DBL_ONE_POINT_ZER0);
 		txtFanCurveB.setBounds(89, 370, 104, 21);
 		
 		txtFanCurveAlpha = new Text(grpFanCurveData, SWT.BORDER);
+		txtFanCurveAlpha.setText(Constants.DBL_FIFTY_SIX_POINT_THREE);
 		txtFanCurveAlpha.setBounds(89, 256, 104, 21);
 		
 		Label lblM1 = new Label(grpFanCurveData, SWT.NONE);
@@ -254,12 +280,34 @@ public class NewFanWindow {
 		txtFanName.setBounds(101, 15, 106, 21);
 		
 		Button btnCancel = new Button(shell, SWT.NONE);
+		btnCancel.addSelectionListener(this);
 		btnCancel.setBounds(21, 434, 94, 31);
 		btnCancel.setText(loader.getValue(LabelConstants.LAYOUT_NEW_FAN_WINDOW_FAN_CURVE_DATA_CANCEL));
 		
-		Button btnSave = new Button(shell, SWT.NONE);
+		btnSave = new Button(shell, SWT.NONE);
+		btnSave.addSelectionListener(this);
 		btnSave.setBounds(376, 434, 94, 31);
 		btnSave.setText(loader.getValue(LabelConstants.LAYOUT_NEW_FAN_WINDOW_FAN_CURVE_DATA_SAVE));
 
+	}
+
+	@Override
+	public void widgetDefaultSelected(SelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void widgetSelected(SelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource().equals(btnSave))
+		{
+			this.fansServerInterface.addFan(txtFanName.getText());
+			this.shell.dispose();
+		}
+		else
+		{
+			this.shell.dispose();
+		}
 	}
 }

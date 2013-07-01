@@ -7,11 +7,14 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.yeshtech.coolingsystem.layout.window.TimeCurveSpecification;
 import com.yeshtech.coolingsystem.util.Constants;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class DataCenterComposite extends Composite {
 
@@ -108,6 +111,17 @@ public class DataCenterComposite extends Composite {
 		lblW.setBounds(203, 29, 11, 15);
 
 		btnNewButton = new Button(grpGeneration1Parameters, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				try {
+					TimeCurveSpecification window = new TimeCurveSpecification();
+					window.open();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		btnNewButton.setBounds(240, 24, 75, 25);
 		btnNewButton.setText(loader
 				.getValue(LabelConstants.LAYOUT_DATA_CENTER_TIME_CURVE));
@@ -208,6 +222,17 @@ public class DataCenterComposite extends Composite {
 		label_13.setBounds(170, 24, 19, 15);
 
 		button = new Button(grpGenerationParameters, SWT.NONE);
+		button.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				try {
+					TimeCurveSpecification window = new TimeCurveSpecification();
+					window.open();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		button.setText(loader
 				.getValue(LabelConstants.LAYOUT_DATA_CENTER_TIME_CURVE));
 		button.setBounds(195, 19, 75, 25);

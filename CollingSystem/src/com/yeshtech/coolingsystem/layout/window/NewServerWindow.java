@@ -7,16 +7,24 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 
+import com.yeshtech.coolingsystem.layout.datacenter.fans.FansServerInterface;
+import com.yeshtech.coolingsystem.util.Constants;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 
-public class NewServerWindow {
+public class NewServerWindow implements SelectionListener{
 
 	protected Shell shell;
 	private Text txtServerName;
 	private Text txtHeatOutput;
 	private Text txtThermalResistance;
-
+	private FansServerInterface fansServerInterface;
+	private Button btnCancel;
+	private Button btnSave;
+	
 	/**
 	 * Launch the application.
 	 * @param args
@@ -45,6 +53,10 @@ public class NewServerWindow {
 		}
 	}
 
+	public void setFansServerInterface(FansServerInterface serverInterface)
+	{
+		this.fansServerInterface = serverInterface;
+	}
 	/**
 	 * Create contents of the window.
 	 */
@@ -71,16 +83,20 @@ public class NewServerWindow {
 		txtServerName.setBounds(167, 16, 181, 21);
 		
 		txtHeatOutput = new Text(shell, SWT.BORDER);
+		txtHeatOutput.setText(Constants.INT_HUNDRED);
 		txtHeatOutput.setBounds(167, 52, 181, 21);
 		
 		txtThermalResistance = new Text(shell, SWT.BORDER);
+		txtThermalResistance.setText(Constants.DBL_ZEROPOINTONE);
 		txtThermalResistance.setBounds(167, 90, 181, 21);
 		
-		Button btnCancel = new Button(shell, SWT.NONE);
+		btnCancel = new Button(shell, SWT.NONE);
+		btnCancel.addSelectionListener(this);
 		btnCancel.setBounds(28, 140, 121, 43);
 		btnCancel.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_CANCEL));
 		
-		Button btnSave = new Button(shell, SWT.NONE);
+		btnSave = new Button(shell, SWT.NONE);
+		btnSave.addSelectionListener(this);
 		btnSave.setBounds(247, 142, 121, 40);
 		btnSave.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_SAVE));
 		
@@ -92,6 +108,26 @@ public class NewServerWindow {
 		lblKw.setBounds(355, 93, 33, 15);
 		lblKw.setText(loader.getValue(LabelConstants.LAYOUT_NEW_SERVER_WINDOW_K_W));
 
+	}
+
+	@Override
+	public void widgetDefaultSelected(SelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void widgetSelected(SelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getSource().equals(btnSave))
+		{
+			this.fansServerInterface.addServer(txtServerName.getText());
+			this.shell.dispose();
+		}
+		else
+		{
+			this.shell.dispose();
+		}
 	}
 
 }

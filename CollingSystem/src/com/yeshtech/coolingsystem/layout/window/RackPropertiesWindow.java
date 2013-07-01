@@ -16,6 +16,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
 import com.yeshtech.coolingsystem.layout.CoolingSystemMain;
+import com.yeshtech.coolingsystem.util.Constants;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 
@@ -69,7 +70,7 @@ public class RackPropertiesWindow implements SelectionListener{
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		PropertiesLoader loader = PropertiesLoader
+		final PropertiesLoader loader = PropertiesLoader
 				.getPropertiesLoader("com.yeshtech.coolingsystem.util.layout-label");
 		shell = new Shell();
 		shell.setSize(570, 475);
@@ -95,9 +96,11 @@ public class RackPropertiesWindow implements SelectionListener{
 		lblNewLabel_2.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_NON_SERVER_EQUIPMENT_THERMAL_RESISTANCE));
 		
 		txtHeatOutput = new Text(grpNonServerEquipment, SWT.BORDER);
+		txtHeatOutput.setText(Constants.INT_ZERO);
 		txtHeatOutput.setBounds(92, 23, 91, 21);
 		
 		txtThermalResistance = new Text(grpNonServerEquipment, SWT.BORDER);
+		txtThermalResistance.setText(Constants.DBL_ZEROPOINTONE);
 		txtThermalResistance.setBounds(133, 58, 118, 21);
 		
 		Button btnNewButton = new Button(grpNonServerEquipment, SWT.NONE);
@@ -134,12 +137,15 @@ public class RackPropertiesWindow implements SelectionListener{
 		lblZdimension.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_RACK_DIMENSION_Z_DIMENSION));
 		
 		txtXDimension = new Text(grpRackDimension, SWT.BORDER);
+		txtXDimension.setText(Constants.DBL_ZERO_POINT_SIX_ZERO_NINE_SIX);
 		txtXDimension.setBounds(101, 18, 97, 21);
 		
 		txtYDimension = new Text(grpRackDimension, SWT.BORDER);
+		txtYDimension.setText(Constants.DBL_ONE_POINT_TWO_ONE_NINE);
 		txtYDimension.setBounds(101, 43, 97, 21);
 		
 		txtZDimension = new Text(grpRackDimension, SWT.BORDER);
+		txtZDimension.setText(Constants.DBL_ONE_POINT_NINE_FIVE_SIX);
 		txtZDimension.setBounds(101, 69, 97, 21);
 		
 		Label lblM1 = new Label(grpRackDimension, SWT.NONE);
@@ -159,34 +165,38 @@ public class RackPropertiesWindow implements SelectionListener{
 		lblNewLabel_3.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_NUMBER_OF_SERVER));
 		
 		txtNumberOfServer = new Text(shell, SWT.BORDER);
+		txtNumberOfServer.setText(Constants.INT_SIX);
 		txtNumberOfServer.setBounds(121, 140, 51, 21);
 		
-		grpServersInRack = new Group(shell,  SWT.NONE);
+		/*grpServersInRack = new Group(shell,  SWT.NONE);
 		grpServersInRack.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_SERVERS_IN_RACK));
 		grpServersInRack.setBounds(10, 180, 529, 159);
-		grpServersInRack.setLayout(new FillLayout(SWT.HORIZONTAL));
+		grpServersInRack.setLayout(new FillLayout(SWT.HORIZONTAL));*/
 		
-		frontComp = new ScrolledComposite(grpServersInRack, SWT.H_SCROLL
+		frontComp = new ScrolledComposite(shell, SWT.BORDER | SWT.H_SCROLL
 		        | SWT.V_SCROLL);
-		
-	    innerFrontComp = new Composite(frontComp, SWT.NONE);
-	    innerFrontComp.setBounds(10, 180, 529, 159);
+		frontComp.setBounds(10, 181, 529, 159);
+	    /*innerFrontComp = new Composite(frontComp, SWT.NONE);
+	    innerFrontComp.setBounds(10, 180, 529, 159);*/
 		//frontComp.setAlwaysShowScrollBars(true);
 		frontComp.setExpandHorizontal(true);
 		frontComp.setExpandVertical(true);
+		
+		
 	    //frontComp.setLayout(new FillLayout());
 
 	    //innerFrontComp.setLayout(new FillLayout());
 		Button btnCreateTable = new Button(shell, SWT.NONE);
 		//btnCreateTable.addSelectionListener(this);
 		
-		/*btnCreateTable.addSelectionListener(new SelectionAdapter() {
+		btnCreateTable.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
+				innerFrontComp = new Composite(frontComp, SWT.NONE);
+			    innerFrontComp.setBounds(10, 180, 529, 159);
+			    
 				if(txtNumberOfServer.getText() != null && !"".equals(txtNumberOfServer.getText()))
 				{
-					
-					
 				    int numberOfServer = Integer.parseInt(txtNumberOfServer.getText());
 				    int cordinates = 0;
 				    for(int i = 1; i <= numberOfServer; i++)
@@ -207,89 +217,92 @@ public class RackPropertiesWindow implements SelectionListener{
 						cordinates = cordinates + 32;
 					}
 					
+
+					frontComp.setContent(innerFrontComp);
+					frontComp.setMinSize(innerFrontComp.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 					
 				}
 			}
-		});*/
+		});
 		
 		
 		btnCreateTable.setBounds(182, 136, 75, 25);
 		btnCreateTable.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_CREATE_TABLE));
 		
-		Combo combo_1 = new Combo(innerFrontComp, SWT.NONE);
+		/*Combo combo_1 = new Combo(frontComp, SWT.NONE);
 		combo_1.setBounds(10, 21 , 142, 23);
-		Button button = new Button(innerFrontComp, SWT.NONE);
+		Button button = new Button(frontComp, SWT.NONE);
 		button.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE));
 		button.setBounds(164, 21, 100, 25);
 		
-		Button button_1 = new Button(innerFrontComp, SWT.NONE);
+		Button button_1 = new Button(frontComp, SWT.NONE);
 		button_1.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE));
 		button_1.setBounds(271, 21, 125, 25);
 		
-		Button button_2 = new Button(innerFrontComp, SWT.NONE);
+		Button button_2 = new Button(frontComp, SWT.NONE);
 		button_2.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
 		button_2.setBounds(402, 21, 91, 25);
 		
-		Combo combo_2 = new Combo(innerFrontComp, SWT.NONE);
+		Combo combo_2 = new Combo(frontComp, SWT.NONE);
 		combo_2.setBounds(10, 56, 142, 23);
 		
-		Button button_3 = new Button(innerFrontComp, SWT.NONE);
+		Button button_3 = new Button(frontComp, SWT.NONE);
 		button_3.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE));
 		button_3.setBounds(164, 53, 100, 25);
 		
-		Button button_4 = new Button(innerFrontComp, SWT.NONE);
+		Button button_4 = new Button(frontComp, SWT.NONE);
 		button_4.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE));
 		button_4.setBounds(271, 53, 125, 25);
 		
-		Button button_5 = new Button(innerFrontComp, SWT.NONE);
+		Button button_5 = new Button(frontComp, SWT.NONE);
 		button_5.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
 		button_5.setBounds(402, 53, 91, 25);
 		
-		Combo combo_3 = new Combo(innerFrontComp, SWT.NONE);
+		Combo combo_3 = new Combo(frontComp, SWT.NONE);
 		combo_3.setBounds(10, 89, 142, 23);
 		
-		Button button_6 = new Button(innerFrontComp, SWT.NONE);
+		Button button_6 = new Button(frontComp, SWT.NONE);
 		button_6.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE));
 		button_6.setBounds(164, 86, 100, 25);
 		
-		Button button_7 = new Button(innerFrontComp, SWT.NONE);
+		Button button_7 = new Button(frontComp, SWT.NONE);
 		button_7.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE));
 		button_7.setBounds(271, 86, 125, 25);
 		
-		Button button_8 = new Button(innerFrontComp, SWT.NONE);
+		Button button_8 = new Button(frontComp, SWT.NONE);
 		button_8.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
 		button_8.setBounds(402, 86, 91, 25);
 		
-		Combo combo_4 = new Combo(innerFrontComp, SWT.NONE);
+		Combo combo_4 = new Combo(frontComp, SWT.NONE);
 		combo_4.setBounds(10, 121, 142, 23);
 		
-		Button button_9 = new Button(innerFrontComp, SWT.NONE);
+		Button button_9 = new Button(frontComp, SWT.NONE);
 		button_9.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE));
 		button_9.setBounds(164, 121, 100, 25);
 		
-		Button button_10 = new Button(innerFrontComp, SWT.NONE);
+		Button button_10 = new Button(frontComp, SWT.NONE);
 		button_10.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE));
 		button_10.setBounds(271, 121, 125, 25);
 		
-		Button button_11 = new Button(innerFrontComp, SWT.NONE);
+		Button button_11 = new Button(frontComp, SWT.NONE);
 		button_11.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
 		button_11.setBounds(402, 121, 91, 25);
 		
 		
-		Combo combo_5 = new Combo(innerFrontComp, SWT.NONE);
+		Combo combo_5 = new Combo(frontComp, SWT.NONE);
 		combo_5.setBounds(10, 156, 142, 23);
 		
-		Button button_12 = new Button(innerFrontComp, SWT.NONE);
+		Button button_12 = new Button(frontComp, SWT.NONE);
 		button_12.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE));
 		button_12.setBounds(164, 156, 100, 25);
 		
-		Button button_13 = new Button(innerFrontComp, SWT.NONE);
+		Button button_13 = new Button(frontComp, SWT.NONE);
 		button_13.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE));
 		button_13.setBounds(271, 156, 125, 25);
 		
-		Button button_14 = new Button(innerFrontComp, SWT.NONE);
+		Button button_14 = new Button(frontComp, SWT.NONE);
 		button_14.setText(loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
-		button_14.setBounds(402, 156, 91, 25);
+		button_14.setBounds(402, 156, 91, 25);*/
 
 
 		Button btnCancel = new Button(shell, SWT.NONE);
@@ -302,9 +315,9 @@ public class RackPropertiesWindow implements SelectionListener{
 		
 				
 		//innerFrontComp = innerFrontComp2;
-		frontComp.setMinHeight(innerFrontComp.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
-	    frontComp.setMinWidth(innerFrontComp.computeSize(SWT.DEFAULT, SWT.DEFAULT).x);
-	    frontComp.setContent(innerFrontComp);
+		//frontComp.setMinHeight(shell.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+	    //frontComp.setMinWidth(shell.computeSize(SWT.DEFAULT, SWT.DEFAULT).x);
+	    //frontComp.setContent(shell);
 	    frontComp.setExpandHorizontal(true);
 	    frontComp.setExpandVertical(true);
 

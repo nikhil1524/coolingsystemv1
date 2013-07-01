@@ -1,4 +1,4 @@
-package com.yeshtech.coolingsystem.layout.printedwindow;
+package com.yeshtech.coolingsystem.layout.datacenter.printedwindow;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -15,14 +15,13 @@ import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-public class PrintedLumpWindow {
+public class PrintedPathWindow {
 
 	protected Shell shell;
-	private Text txtNameOfTheLump;
-	private Button btnPrintedLumpSave;
-	private PropertiesLoader loader;
+	private Text txtNameOfThePath;
+	public PropertiesLoader loader;
 
-	public PrintedLumpWindow(PropertiesLoader loader) {
+	public PrintedPathWindow(PropertiesLoader loader) {
 		this.loader = loader;
 	}
 
@@ -44,7 +43,7 @@ public class PrintedLumpWindow {
 		shell.setLocation(x, y);
 		shell.open();
 		shell.layout();
-
+		
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -58,57 +57,58 @@ public class PrintedLumpWindow {
 	protected void createContents() {
 
 		shell = new Shell();
-		shell.setImage(SWTResourceManager.getImage(PrintedLumpWindow.class,
-				"/icon/App.ico"));
+		shell.setImage(SWTResourceManager.getImage(PrintedPathWindow.class, "/icon/App.ico"));
 		shell.setSize(457, 244);
 		shell.setText(loader
-				.getValue(LabelConstants.LAYOUT_PRINTED_LUMPS_NEW_PRINTED_LUMPS));
-		Label lblNameOfTheLump = new Label(shell, SWT.NONE);
-		lblNameOfTheLump.setBounds(24, 38, 249, 15);
-		lblNameOfTheLump
+				.getValue(LabelConstants.LAYOUT_PRINTED_PATHS_NEW_PRINTED_PATHS));
+		Label lblNameOfThePath = new Label(shell, SWT.NONE);
+		lblNameOfThePath.setBounds(24, 39, 249, 15);
+		lblNameOfThePath
 				.setText(loader
-						.getValue(LabelConstants.LAYOUT_PRINTED_LUMPS_NAME_OF_THE_LUMP));
+						.getValue(LabelConstants.LAYOUT_PRINTED_PATHS_NAME_OF_THE_PATH));
 
-		txtNameOfTheLump = new Text(shell, SWT.BORDER);
-		txtNameOfTheLump.setBounds(20, 77, 397, 25);
+		txtNameOfThePath = new Text(shell, SWT.BORDER);
+		txtNameOfThePath.setBounds(24, 86, 407, 25);
 
-		Button btnPrintedLumpCancel = new Button(shell, SWT.NONE);
-		btnPrintedLumpCancel.addSelectionListener(new SelectionAdapter() {
+		Button btnPrintedPathCancel = new Button(shell, SWT.NONE);
+		btnPrintedPathCancel.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				shell.setVisible(false);
 				shell.dispose();
 			}
 		});
-		btnPrintedLumpCancel.setBounds(20, 149, 105, 32);
-		btnPrintedLumpCancel.setText(loader
+		btnPrintedPathCancel.setBounds(20, 143, 105, 32);
+		btnPrintedPathCancel.setText(loader
 				.getValue(LabelConstants.LAYOUT_CANCEL));
 
-		btnPrintedLumpSave = new Button(shell, SWT.NONE);
-		btnPrintedLumpSave.addSelectionListener(new SelectionAdapter() {
+		Button btnPrintedPathSave = new Button(shell, SWT.NONE);
+		btnPrintedPathSave.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				shell.setVisible(false);
 				shell.dispose();
 			}
 		});
-		btnPrintedLumpSave.setBounds(312, 149, 105, 32);
-		btnPrintedLumpSave.setText(loader.getValue(LabelConstants.LAYOUT_SAVE));
+		btnPrintedPathSave.setBounds(326, 143, 105, 32);
+		btnPrintedPathSave.setText(loader.getValue(LabelConstants.LAYOUT_SAVE));
 	}
 
-	public Text getTxtNameOfTheLump() {
-		return txtNameOfTheLump;
-	}
-
+	/**
+	 * Launch the application.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			PropertiesLoader loader = PropertiesLoader
 					.getPropertiesLoader("com.deam.util.layout-label");
 
-			PrintedLumpWindow window = new PrintedLumpWindow(loader);
+			PrintedPathWindow window = new PrintedPathWindow(loader);
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 }

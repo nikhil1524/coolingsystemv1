@@ -1,4 +1,4 @@
-package com.yeshtech.coolingsystem.layout.solution;
+package com.yeshtech.coolingsystem.layout.datacenter.solution;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;

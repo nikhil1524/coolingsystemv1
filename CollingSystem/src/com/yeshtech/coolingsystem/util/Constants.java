@@ -13,7 +13,24 @@ public interface Constants {
 	public String INT_TWENTY = "20";
 	public String INT_TWENTYFIVE = "25";
 	public String INT_FIFTY = "50";
+	public String DBL_ONE_POINT_ZER0 = "1.0";
+	public String DBL_ZERO_POINT_EIGHT = "0.8";
+	public String DBL_ZERO_POINT_ZERO_FIVE = "0.05";
+	public String INT_THOUSAND = "1000";
+	public String DBL_ZERO_POINT_NINE = "0.9";
+	public String DBL_FIFTY_SIX_POINT_THREE = "56.3";
+	public String DBL_ZERO_POINT_FIVE = "0.5";
+	public String DBL_ZERO_POINT_SEVENTY_FIVE = "0.75";
+	public String INT_FOUR = "4";
+	public String INT_HUNDRED = "100";
+	public String INT_SIX = "6";
+	public String DBL_ZERO_POINT_SIX_ZERO_NINE_SIX = "0.6096";
+	public String DBL_ONE_POINT_TWO_ONE_NINE = "1.219";
+	public String DBL_ONE_POINT_NINE_FIVE_SIX = "1.956";
 	
+	
+	public String INPUT_TXT = "input.txt";
+	public String OUTPUT_TXT = "output.txt";
 	public String OUT_S_TXT = "out_s.txt";
 	public String UNIT_S ="s";
 	

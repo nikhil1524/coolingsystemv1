@@ -13,12 +13,12 @@ import org.eclipse.swt.widgets.Shell;
 
 import com.yeshtech.coolingsystem.layout.constants.ConstantsComposite;
 import com.yeshtech.coolingsystem.layout.datacenter.DataCenterComposite;
-import com.yeshtech.coolingsystem.layout.external.ExternalComposite;
-import com.yeshtech.coolingsystem.layout.fans.FansServerComposite;
-import com.yeshtech.coolingsystem.layout.io.IOComposite;
-import com.yeshtech.coolingsystem.layout.lumps.LumpsComposite;
-import com.yeshtech.coolingsystem.layout.run.RunComposite;
-import com.yeshtech.coolingsystem.layout.solution.SolutionComposite;
+import com.yeshtech.coolingsystem.layout.datacenter.external.ExternalComposite;
+import com.yeshtech.coolingsystem.layout.datacenter.fans.FansServerComposite;
+import com.yeshtech.coolingsystem.layout.datacenter.io.IOComposite;
+import com.yeshtech.coolingsystem.layout.datacenter.lumps.LumpsComposite;
+import com.yeshtech.coolingsystem.layout.datacenter.run.RunComposite;
+import com.yeshtech.coolingsystem.layout.datacenter.solution.SolutionComposite;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 

@@ -1,4 +1,4 @@
-package com.yeshtech.coolingsystem.layout.external;
+package com.yeshtech.coolingsystem.layout.datacenter.external;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
@@ -7,9 +7,12 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.yeshtech.coolingsystem.layout.window.TimeCurveSpecification;
 import com.yeshtech.coolingsystem.util.Constants;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class ExternalComposite extends Composite {
 
@@ -47,6 +50,17 @@ public class ExternalComposite extends Composite {
 		lblC.setBounds(362, 27, 11, 15);
 
 		Button btnExtTimeCurve = new Button(this, SWT.NONE);
+		btnExtTimeCurve.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				try {
+					TimeCurveSpecification window = new TimeCurveSpecification();
+					window.open();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		btnExtTimeCurve.setText(loader
 				.getValue(LabelConstants.LAYOUT_EXTERNAL_TIMECURVE));
 		btnExtTimeCurve.setBounds(396, 27, 75, 25);

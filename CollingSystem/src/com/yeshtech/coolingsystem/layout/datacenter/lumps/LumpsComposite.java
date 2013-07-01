@@ -1,4 +1,4 @@
-package com.yeshtech.coolingsystem.layout.lumps;
+package com.yeshtech.coolingsystem.layout.datacenter.lumps;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -8,8 +8,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
-import com.yeshtech.coolingsystem.layout.printedwindow.PrintedLumpWindow;
-import com.yeshtech.coolingsystem.layout.printedwindow.PrintedPathWindow;
+import com.yeshtech.coolingsystem.layout.datacenter.printedwindow.PrintedLumpWindow;
+import com.yeshtech.coolingsystem.layout.datacenter.printedwindow.PrintedPathWindow;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 

@@ -7,6 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.yeshtech.coolingsystem.util.Constants;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 
@@ -76,9 +77,11 @@ public class RunWindow {
 		btnClose.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_CLOSE));
 		
 		txtInputDeckFileName = new Text(shell, SWT.BORDER);
+		txtInputDeckFileName.setText(Constants.INPUT_TXT);
 		txtInputDeckFileName.setBounds(159, 53, 197, 21);
 		
 		txtOutputResults = new Text(shell, SWT.BORDER);
+		txtOutputResults.setText(Constants.OUTPUT_TXT);
 		txtOutputResults.setBounds(159, 88, 197, 21);
 
 	}
