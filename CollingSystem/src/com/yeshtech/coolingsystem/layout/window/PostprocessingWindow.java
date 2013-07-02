@@ -19,13 +19,10 @@ public class PostprocessingWindow {
 
 	protected Shell shell;
 	private Text txtResultFileName;
-	private Text text;
 	private Text text_1;
 	private Text text_2;
 	private Text text_3;
 	private Text text_4;
-	private Text text_5;
-
 	/**
 	 * Launch the application.
 	 * @param args
@@ -90,7 +87,7 @@ public class PostprocessingWindow {
 		tbtmDdd.setControl(composite_1);
 		composite_1.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
-		text = new Text(composite_1, SWT.BORDER);
+		new Text(composite_1, SWT.BORDER);
 		
 		CTabItem tbtmExergyDestruction = new CTabItem(tabFolder, SWT.NONE);
 		tbtmExergyDestruction.setText(loader.getValue(LabelConstants.LAYOUT_POST_PROCESSING_WINDOW_EXERGY_DESTRUCTION));
@@ -133,7 +130,7 @@ public class PostprocessingWindow {
 		tbtmDesignParameter.setControl(composite_3);
 		composite_3.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
-		text_5 = new Text(composite_3, SWT.BORDER);
+		new Text(composite_3, SWT.BORDER);
 		
 		CTabItem tbtmGraphics = new CTabItem(tabFolder, SWT.NONE);
 		tbtmGraphics.setText(loader.getValue(LabelConstants.LAYOUT_POST_PROCESSING_WINDOW_GRAPHICS));
