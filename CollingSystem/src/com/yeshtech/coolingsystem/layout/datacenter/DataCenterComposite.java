@@ -6,7 +6,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-
 import com.yeshtech.coolingsystem.layout.window.TimeCurveSpecification;
 import com.yeshtech.coolingsystem.util.Constants;
 import com.yeshtech.coolingsystem.util.LabelConstants;

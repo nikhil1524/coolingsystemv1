@@ -7,7 +7,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
-
 import com.yeshtech.coolingsystem.layout.datacenter.fans.FansServerInterface;
 import com.yeshtech.coolingsystem.util.Constants;
 import com.yeshtech.coolingsystem.util.LabelConstants;
