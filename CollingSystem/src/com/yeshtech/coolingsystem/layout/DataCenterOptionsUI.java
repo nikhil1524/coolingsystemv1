@@ -20,6 +20,7 @@ import com.yeshtech.coolingsystem.layout.datacenter.lumps.LumpsComposite;
 import com.yeshtech.coolingsystem.layout.datacenter.run.RunComposite;
 import com.yeshtech.coolingsystem.layout.datacenter.solution.SolutionComposite;
 import com.yeshtech.coolingsystem.layout.datecenter.external.ExternalComposite;
+import com.yeshtech.coolingsystem.util.DisplayMonitor;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 
@@ -54,16 +55,17 @@ public class DataCenterOptionsUI {
 		Display display = Display.getDefault();
 		createContents(display);
 
-		// setting the screen in center
-
-		Monitor primary = display.getPrimaryMonitor();
-		Rectangle bounds = primary.getBounds();
-		Rectangle rect = shell.getBounds();
-
-		int x = bounds.x + (bounds.width - rect.width) / 2;
-		int y = bounds.y + (bounds.height - rect.height) / 2;
-
-		shell.setLocation(x, y);
+//		// setting the screen in center
+//
+//		Monitor primary = display.getPrimaryMonitor();
+//		Rectangle bounds = primary.getBounds();
+//		Rectangle rect = shell.getBounds();
+//
+//		int x = bounds.x + (bounds.width - rect.width) / 2;
+//		int y = bounds.y + (bounds.height - rect.height) / 2;
+		
+		DisplayMonitor dm = DisplayMonitor.getInstance(shell,display);
+		shell.setLocation(dm.getMonitorCenterXCoordinate(),dm.getMonitorCenterYCoordinate());
 
 		shell.open();
 		shell.layout();

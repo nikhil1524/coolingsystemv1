@@ -8,8 +8,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import com.yeshtech.coolingsystem.util.Constants;
+import com.yeshtech.coolingsystem.util.DisplayMonitor;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class RunWindow {
 
@@ -19,6 +21,7 @@ public class RunWindow {
 
 	/**
 	 * Launch the application.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -38,6 +41,10 @@ public class RunWindow {
 		createContents();
 		shell.open();
 		shell.layout();
+		// setting display to center of screen
+		DisplayMonitor.getInstance(shell, display);
+		shell.setLocation(DisplayMonitor.getMonitorCenterXCoordinate(),
+				DisplayMonitor.getMonitorCenterYCoordinate());
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -51,35 +58,43 @@ public class RunWindow {
 	protected void createContents() {
 		PropertiesLoader loader = PropertiesLoader
 				.getPropertiesLoader("com.yeshtech.coolingsystem.util.layout-label");
-		
+
 		shell = new Shell();
+		shell.setImage(SWTResourceManager.getImage(RunWindow.class,
+				"/icon/App.ico"));
 		shell.setSize(389, 261);
 		shell.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW));
-		
+
 		Button chkPreprocessOnly = new Button(shell, SWT.CHECK);
 		chkPreprocessOnly.setBounds(20, 20, 129, 16);
-		chkPreprocessOnly.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_PREPROCESS_ONLY));
-		
+		chkPreprocessOnly.setText(loader
+				.getValue(LabelConstants.LAYOUT_RUN_WINDOW_PREPROCESS_ONLY));
+
 		Label lblInputDeckFileName = new Label(shell, SWT.NONE);
 		lblInputDeckFileName.setBounds(20, 56, 129, 15);
-		lblInputDeckFileName.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_INPUT_DECK_FILENAME));
-		
+		lblInputDeckFileName
+				.setText(loader
+						.getValue(LabelConstants.LAYOUT_RUN_WINDOW_INPUT_DECK_FILENAME));
+
 		Label lblOutputResults = new Label(shell, SWT.NONE);
 		lblOutputResults.setBounds(20, 90, 133, 15);
-		lblOutputResults.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_OUTPUT_RESULTS_FILENAME));
-		
+		lblOutputResults
+				.setText(loader
+						.getValue(LabelConstants.LAYOUT_RUN_WINDOW_OUTPUT_RESULTS_FILENAME));
+
 		Button btnGo = new Button(shell, SWT.NONE);
 		btnGo.setBounds(21, 123, 335, 46);
 		btnGo.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_GO));
-		
+
 		Button btnClose = new Button(shell, SWT.NONE);
 		btnClose.setBounds(20, 183, 93, 25);
-		btnClose.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_CLOSE));
-		
+		btnClose.setText(loader
+				.getValue(LabelConstants.LAYOUT_RUN_WINDOW_CLOSE));
+
 		txtInputDeckFileName = new Text(shell, SWT.BORDER);
 		txtInputDeckFileName.setText(Constants.INPUT_TXT);
 		txtInputDeckFileName.setBounds(159, 53, 197, 21);
-		
+
 		txtOutputResults = new Text(shell, SWT.BORDER);
 		txtOutputResults.setText(Constants.OUTPUT_TXT);
 		txtOutputResults.setBounds(159, 88, 197, 21);
