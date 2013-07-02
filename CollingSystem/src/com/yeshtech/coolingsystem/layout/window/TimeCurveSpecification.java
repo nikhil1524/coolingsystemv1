@@ -2,6 +2,7 @@ package com.yeshtech.coolingsystem.layout.window;
 
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.SWT;
@@ -76,21 +77,21 @@ public class TimeCurveSpecification {
 		txtNumberOfRows.setBounds(125, 41, 146, 21);
 		
 		
-		/*Composite composite = new Composite(shell, SWT.NONE);
-		composite.setBounds(35, 82, 336, 253);*/
+		Composite composite = new Composite(shell, SWT.NONE);
+		composite.setBounds(22, 82, 374, 266);
 		
-		/*Group grpTimeCurveTable = new Group(composite, SWT.NONE);
+		Group grpTimeCurveTable = new Group(composite, SWT.NONE);
 		grpTimeCurveTable.setText(loader.getValue(LabelConstants.LAYOUT_TIME_CURVE_SPECIFICATION_WINDOW_TIMECURVE_TABLE));
-		grpTimeCurveTable.setBounds(10, 0, 336, 253);*/
+		grpTimeCurveTable.setBounds(0, 0, 374, 266);
 		
 		/*grpTimeCurveTable = new Group(shell,  SWT.NONE);
 		grpTimeCurveTable.setText(loader.getValue(LabelConstants.LAYOUT_TIME_CURVE_SPECIFICATION_WINDOW_TIMECURVE_TABLE));
 		grpTimeCurveTable.setBounds(20, 75, 365, 253);
 		grpTimeCurveTable.setLayout(new FillLayout(SWT.HORIZONTAL));*/
 		
-		frontComp = new ScrolledComposite(shell,SWT.BORDER | SWT.H_SCROLL
+		frontComp = new ScrolledComposite(grpTimeCurveTable,SWT.BORDER | SWT.H_SCROLL
 		        | SWT.V_SCROLL);
-		frontComp.setBounds(20, 85, 350, 250);
+		frontComp.setBounds(10, 22, 354, 238);
 		frontComp.setExpandHorizontal(true);
 		frontComp.setExpandVertical(true);
 		
@@ -141,7 +142,7 @@ public class TimeCurveSpecification {
 		btnCancel.setText(loader.getValue(LabelConstants.LAYOUT_TIME_CURVE_SPECIFICATION_WINDOW_CANCEL));
 		
 		Button btnSave = new Button(shell, SWT.NONE);
-		btnSave.setBounds(274, 354, 99, 34);
+		btnSave.setBounds(297, 354, 99, 34);
 		btnSave.setText(loader.getValue(LabelConstants.LAYOUT_TIME_CURVE_SPECIFICATION_WINDOW_SAVE));
 /*
 		frontComp.setMinHeight(innerFrontComp.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);

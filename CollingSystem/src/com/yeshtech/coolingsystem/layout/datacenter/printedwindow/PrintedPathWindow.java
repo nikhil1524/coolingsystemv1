@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.yeshtech.coolingsystem.layout.datacenter.lumps.LumpsInterface;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -20,11 +21,16 @@ public class PrintedPathWindow {
 	protected Shell shell;
 	private Text txtNameOfThePath;
 	public PropertiesLoader loader;
+	private LumpsInterface lumpsInterface;
 
 	public PrintedPathWindow(PropertiesLoader loader) {
 		this.loader = loader;
 	}
 
+	public void setLumpsInterface(LumpsInterface lumpsInterface)
+	{
+		this.lumpsInterface = lumpsInterface;
+	}
 	/**
 	 * Open the window.
 	 */
@@ -86,6 +92,7 @@ public class PrintedPathWindow {
 		btnPrintedPathSave.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
+				lumpsInterface.addPrintedPath(txtNameOfThePath.getText());
 				shell.setVisible(false);
 				shell.dispose();
 			}
