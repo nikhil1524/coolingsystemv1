@@ -25,6 +25,7 @@ public class LumpsComposite extends Composite implements SelectionListener,Lumps
 	/**
 	 * Create the composite.
 	 * 
+	 * 
 	 * @param parent
 	 * @param style
 	 */
