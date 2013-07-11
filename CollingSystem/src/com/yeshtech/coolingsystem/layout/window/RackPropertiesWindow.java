@@ -61,9 +61,10 @@ public class RackPropertiesWindow implements SelectionListener {
 		shell.open();
 		shell.layout();
 		// setting display to center of screen
-		DisplayMonitor.getInstance(shell, display);
-		shell.setLocation(DisplayMonitor.getMonitorCenterXCoordinate(),
-				DisplayMonitor.getMonitorCenterYCoordinate());
+		DisplayMonitor dm = new DisplayMonitor(shell, display);
+		shell.setLocation(dm.getMonitorCenterXCoordinate(),
+				dm.getMonitorCenterYCoordinate());
+
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -123,6 +124,8 @@ public class RackPropertiesWindow implements SelectionListener {
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
+				TimeCurveSpecification tmeCureve = new TimeCurveSpecification();
+				tmeCureve.open();
 			}
 		});
 		btnNewButton.setBounds(213, 19, 75, 25);
@@ -202,17 +205,15 @@ public class RackPropertiesWindow implements SelectionListener {
 		txtNumberOfServer.setBounds(121, 140, 51, 21);
 
 		Composite comp_grpSerinRack = new Composite(shell, SWT.NONE);
-		comp_grpSerinRack.setBounds(10, 180, 533, 213);
+		comp_grpSerinRack.setBounds(10, 163, 534, 230);
 
 		grpServersInRack = new Group(comp_grpSerinRack, SWT.NONE);
-		grpServersInRack
-				.setText(loader
-						.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_SERVERS_IN_RACK));
-		grpServersInRack.setBounds(0, -14, 533, 227);
+		grpServersInRack.setText("Servers in Rack ");
+		grpServersInRack.setBounds(0, 10, 534, 210);
 		grpServersInRack.setVisible(false);
 		frontComp = new ScrolledComposite(grpServersInRack, SWT.BORDER
 				| SWT.H_SCROLL | SWT.V_SCROLL);
-		frontComp.setBounds(0, 25, 533, 192);
+		frontComp.setBounds(0, 25, 533, 185);
 		frontComp.setExpandHorizontal(true);
 		frontComp.setExpandVertical(true);
 
@@ -220,6 +221,7 @@ public class RackPropertiesWindow implements SelectionListener {
 		btnCreateTable.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
+
 				innerFrontComp = new Composite(frontComp, SWT.NONE);
 				innerFrontComp.setBounds(0, 0, 529, 159);
 
@@ -228,23 +230,51 @@ public class RackPropertiesWindow implements SelectionListener {
 					int numberOfServer = Integer.parseInt(txtNumberOfServer
 							.getText());
 					int cordinates = 0;
-					for (int i = 1; i <= numberOfServer; i++) {
-						Combo combo_1 = new Combo(innerFrontComp, SWT.NONE);
-						combo_1.setBounds(10, 21 + cordinates, 142, 23);
-						Button button = new Button(innerFrontComp, SWT.NONE);
-						button.setText(loader
+					Combo[] arr_combo_servers = new Combo[numberOfServer];
+					Button[] arr_btn_heat_timeCurve = new Button[numberOfServer];
+					Button[] arr_btn_FanspeedTimeCurve = new Button[numberOfServer];
+					Button[] arr_btn_delete = new Button[numberOfServer];
+
+					for (int i = 0; i < numberOfServer; i++) {
+						arr_combo_servers[i] = new Combo(innerFrontComp,
+								SWT.NONE);
+						arr_combo_servers[i].setBounds(10, 21 + cordinates,
+								245, 23);
+						arr_btn_heat_timeCurve[i] = new Button(innerFrontComp,
+								SWT.NONE);
+						arr_btn_heat_timeCurve[i].setText(loader
 								.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE));
-						button.setBounds(164, 21 + cordinates, 100, 25);
+						arr_btn_heat_timeCurve[i].setBounds(271,
+								21 + cordinates, 100, 25);
+						arr_btn_heat_timeCurve[i]
+								.addSelectionListener(new SelectionAdapter() {
+									public void widgetSelected(
+											SelectionEvent arg0) {
+										TimeCurveSpecification window = new TimeCurveSpecification();
+										window.open();
+									}
+								});
 
-						Button button_1 = new Button(innerFrontComp, SWT.NONE);
-						button_1.setText(loader
+						arr_btn_FanspeedTimeCurve[i] = new Button(
+								innerFrontComp, SWT.NONE);
+						arr_btn_FanspeedTimeCurve[i].setText(loader
 								.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE));
-						button_1.setBounds(271, 21 + cordinates, 125, 25);
+						arr_btn_FanspeedTimeCurve[i].setBounds(380,
+								21 + cordinates, 125, 25);
+						arr_btn_FanspeedTimeCurve[i]
+								.addSelectionListener(new SelectionAdapter() {
+									public void widgetSelected(
+											SelectionEvent arg0) {
+										TimeCurveSpecification window = new TimeCurveSpecification();
+										window.open();
+									}
+								});
 
-						Button button_2 = new Button(innerFrontComp, SWT.NONE);
-						button_2.setText(loader
-								.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
-						button_2.setBounds(402, 21 + cordinates, 91, 25);
+//						arr_btn_delete[i] = new Button(innerFrontComp, SWT.NONE);
+//						arr_btn_delete[i].setText(loader
+//								.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
+//						arr_btn_delete[i].setBounds(402, 21 + cordinates, 91,
+//								25);
 						cordinates = cordinates + 32;
 					}
 
@@ -252,7 +282,6 @@ public class RackPropertiesWindow implements SelectionListener {
 					frontComp.setMinSize(innerFrontComp.computeSize(
 							SWT.DEFAULT, SWT.DEFAULT));
 					grpServersInRack.setVisible(true);
-
 				}
 			}
 		});
@@ -262,98 +291,15 @@ public class RackPropertiesWindow implements SelectionListener {
 				.setText(loader
 						.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_CREATE_TABLE));
 
-		/*
-		 * Combo combo_1 = new Combo(frontComp, SWT.NONE); combo_1.setBounds(10,
-		 * 21 , 142, 23); Button button = new Button(frontComp, SWT.NONE);
-		 * button.setText(loader.getValue(LabelConstants.
-		 * LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE)); button.setBounds(164,
-		 * 21, 100, 25);
-		 * 
-		 * Button button_1 = new Button(frontComp, SWT.NONE);
-		 * button_1.setText(loader
-		 * .getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE
-		 * )); button_1.setBounds(271, 21, 125, 25);
-		 * 
-		 * Button button_2 = new Button(frontComp, SWT.NONE);
-		 * button_2.setText(loader
-		 * .getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
-		 * button_2.setBounds(402, 21, 91, 25);
-		 * 
-		 * Combo combo_2 = new Combo(frontComp, SWT.NONE); combo_2.setBounds(10,
-		 * 56, 142, 23);
-		 * 
-		 * Button button_3 = new Button(frontComp, SWT.NONE);
-		 * button_3.setText(loader
-		 * .getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE
-		 * )); button_3.setBounds(164, 53, 100, 25);
-		 * 
-		 * Button button_4 = new Button(frontComp, SWT.NONE);
-		 * button_4.setText(loader
-		 * .getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE
-		 * )); button_4.setBounds(271, 53, 125, 25);
-		 * 
-		 * Button button_5 = new Button(frontComp, SWT.NONE);
-		 * button_5.setText(loader
-		 * .getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
-		 * button_5.setBounds(402, 53, 91, 25);
-		 * 
-		 * Combo combo_3 = new Combo(frontComp, SWT.NONE); combo_3.setBounds(10,
-		 * 89, 142, 23);
-		 * 
-		 * Button button_6 = new Button(frontComp, SWT.NONE);
-		 * button_6.setText(loader
-		 * .getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE
-		 * )); button_6.setBounds(164, 86, 100, 25);
-		 * 
-		 * Button button_7 = new Button(frontComp, SWT.NONE);
-		 * button_7.setText(loader
-		 * .getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE
-		 * )); button_7.setBounds(271, 86, 125, 25);
-		 * 
-		 * Button button_8 = new Button(frontComp, SWT.NONE);
-		 * button_8.setText(loader
-		 * .getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE));
-		 * button_8.setBounds(402, 86, 91, 25);
-		 * 
-		 * Combo combo_4 = new Combo(frontComp, SWT.NONE); combo_4.setBounds(10,
-		 * 121, 142, 23);
-		 * 
-		 * Button button_9 = new Button(frontComp, SWT.NONE);
-		 * button_9.setText(loader
-		 * .getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE
-		 * )); button_9.setBounds(164, 121, 100, 25);
-		 * 
-		 * Button button_10 = new Button(frontComp, SWT.NONE);
-		 * button_10.setText(loader.getValue(LabelConstants.
-		 * LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE));
-		 * button_10.setBounds(271, 121, 125, 25);
-		 * 
-		 * Button button_11 = new Button(frontComp, SWT.NONE);
-		 * button_11.setText(
-		 * loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE
-		 * )); button_11.setBounds(402, 121, 91, 25);
-		 * 
-		 * 
-		 * Combo combo_5 = new Combo(frontComp, SWT.NONE); combo_5.setBounds(10,
-		 * 156, 142, 23);
-		 * 
-		 * Button button_12 = new Button(frontComp, SWT.NONE);
-		 * button_12.setText(loader.getValue(LabelConstants.
-		 * LAYOUT_RACK_PROPERTIES_WINDOW_HEAT_TIMECURVE));
-		 * button_12.setBounds(164, 156, 100, 25);
-		 * 
-		 * Button button_13 = new Button(frontComp, SWT.NONE);
-		 * button_13.setText(loader.getValue(LabelConstants.
-		 * LAYOUT_RACK_PROPERTIES_WINDOW_FANSPEED_TIMECURVE));
-		 * button_13.setBounds(271, 156, 125, 25);
-		 * 
-		 * Button button_14 = new Button(frontComp, SWT.NONE);
-		 * button_14.setText(
-		 * loader.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_DELETE
-		 * )); button_14.setBounds(402, 156, 91, 25);
-		 */
-
+		
 		Button btnCancel = new Button(shell, SWT.NONE);
+		btnCancel.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				shell.setVisible(false);
+				shell.dispose();
+			}
+		});
 		btnCancel.setBounds(10, 399, 93, 36);
 		btnCancel.setText(loader
 				.getValue(LabelConstants.LAYOUT_RACK_PROPERTIES_WINDOW_CANCEL));
@@ -373,17 +319,17 @@ public class RackPropertiesWindow implements SelectionListener {
 			combo.setBounds(10, 21 + cordinates, 142, 25);
 			combo.setVisible(true);
 			btnNewButton_1 = new Button(innerFrontComp, SWT.NONE);
-			btnNewButton_1.setBounds(164, 21 + cordinates, 100, 25);
+			btnNewButton_1.setBounds(271, 21 + cordinates, 100, 25);
 			btnNewButton_1.setText("Heat Timecurve");
 			btnNewButton_1.setVisible(true);
 			btnNewButton_2 = new Button(innerFrontComp, SWT.NONE);
-			btnNewButton_2.setBounds(271, 21 + cordinates, 125, 25);
+			btnNewButton_2.setBounds(402, 21 + cordinates, 125, 25);
 			btnNewButton_2.setText("Fanspeed Timecurve");
 			btnNewButton_2.setVisible(true);
-			btnNewButton_3 = new Button(innerFrontComp, SWT.NONE);
-			btnNewButton_3.setBounds(402, 21 + cordinates, 91, 25);
-			btnNewButton_3.setText("Delete");
-			btnNewButton_3.setVisible(true);
+//			btnNewButton_3 = new Button(innerFrontComp, SWT.NONE);
+//			btnNewButton_3.setBounds(402, 21 + cordinates, 91, 25);
+//			btnNewButton_3.setText("Delete");
+//			btnNewButton_3.setVisible(true);
 			cordinates = cordinates + 32;
 		}
 	}

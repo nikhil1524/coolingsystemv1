@@ -49,9 +49,9 @@ public class TimeCurveSpecification {
 		shell.open();
 		shell.layout();
 		// setting display to center of screen
-		DisplayMonitor.getInstance(shell, display);
-		shell.setLocation(DisplayMonitor.getMonitorCenterXCoordinate(),
-				DisplayMonitor.getMonitorCenterYCoordinate());
+		DisplayMonitor dm = new DisplayMonitor(shell,display);
+		shell.setLocation(dm.getMonitorCenterXCoordinate(),dm.getMonitorCenterYCoordinate());
+
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();

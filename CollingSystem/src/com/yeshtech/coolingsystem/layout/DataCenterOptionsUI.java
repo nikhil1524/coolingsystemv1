@@ -5,10 +5,8 @@ import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 
 import com.yeshtech.coolingsystem.layout.constants.ConstantsComposite;
@@ -64,7 +62,7 @@ public class DataCenterOptionsUI {
 //		int x = bounds.x + (bounds.width - rect.width) / 2;
 //		int y = bounds.y + (bounds.height - rect.height) / 2;
 		
-		DisplayMonitor dm = DisplayMonitor.getInstance(shell,display);
+		DisplayMonitor dm = new DisplayMonitor(shell,display);
 		shell.setLocation(dm.getMonitorCenterXCoordinate(),dm.getMonitorCenterYCoordinate());
 
 		shell.open();

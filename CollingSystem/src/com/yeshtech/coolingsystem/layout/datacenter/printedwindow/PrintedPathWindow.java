@@ -3,15 +3,14 @@ package com.yeshtech.coolingsystem.layout.datacenter.printedwindow;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.yeshtech.coolingsystem.layout.datacenter.lumps.LumpsInterface;
+import com.yeshtech.coolingsystem.util.DisplayMonitor;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -37,16 +36,10 @@ public class PrintedPathWindow {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		// setting the screen in center
+		// setting display to center of screen
+		DisplayMonitor dm = new DisplayMonitor(shell,display);
+		shell.setLocation(dm.getMonitorCenterXCoordinate(),dm.getMonitorCenterYCoordinate());
 
-		Monitor primary = display.getPrimaryMonitor();
-		Rectangle bounds = primary.getBounds();
-		Rectangle rect = shell.getBounds();
-
-		int x = bounds.x + (bounds.width - rect.width) / 2;
-		int y = bounds.y + (bounds.height - rect.height) / 2;
-
-		shell.setLocation(x, y);
 		shell.open();
 		shell.layout();
 		

@@ -3,11 +3,17 @@ package com.yeshtech.coolingsystem.layout.datacenter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import com.yeshtech.coolingsystem.layout.window.DataCenterLayoutWindow;
 import com.yeshtech.coolingsystem.layout.window.TimeCurveSpecification;
 import com.yeshtech.coolingsystem.util.Constants;
+import com.yeshtech.coolingsystem.util.CoolingSystemUtil;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 import org.eclipse.swt.events.FocusAdapter;
@@ -246,6 +252,21 @@ public class DataCenterComposite extends Composite {
 		txtDataCenterGPNoRacks.setText(Constants.INT_ONE);
 
 		btnLayout = new Button(grpGenerationParameters, SWT.NONE);
+		btnLayout.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+
+				try {
+					if (checkNumRows()) {
+						DataCenterLayoutWindow window = new DataCenterLayoutWindow(Integer.parseInt(txtDataCenterGPNoRacks.getText()));
+						window.open();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		});
 		btnLayout.setText(loader
 				.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT));
 		btnLayout.setBounds(210, 60, 67, 25);
@@ -297,8 +318,8 @@ public class DataCenterComposite extends Composite {
 		txtDataCenterGPCeilOpen = new Text(grpGenerationParameters, SWT.BORDER);
 		txtDataCenterGPCeilOpen.setBounds(223, 169, 58, 20);
 		txtDataCenterGPCeilOpen.setText(Constants.DBL_ZEROPOINTTWO);
-		
-		//default gen2Para Should be disabled
+
+		// default gen2Para Should be disabled
 		enabledisableGen2Para(false);
 	}
 
@@ -340,4 +361,30 @@ public class DataCenterComposite extends Composite {
 		// Disable the check that prevents subclassing of SWT components
 	}
 
+	protected boolean checkNumRows() {
+
+		if (!CoolingSystemUtil.isNumber(txtDataCenterGPNoRacks.getText())) {
+//			Display display = new Display();
+//			Shell shell = new Shell(display);
+//
+//			MessageBox messageBox = new MessageBox(shell, SWT.ICON_WARNING
+//					| SWT.ABORT | SWT.RETRY | SWT.IGNORE);
+//
+//			messageBox.setText("Warning");
+//			messageBox.setMessage("Save the changes before exiting?");
+//			int buttonID = messageBox.open();
+//			switch (buttonID) {
+//			case SWT.YES:
+//				// saves changes ...
+//			case SWT.NO:
+//				// exits here ...
+//				break;
+//			case SWT.CANCEL:
+//				// does nothing ...
+//			}
+			//System.out.println(buttonID);
+			return false;
+		} else
+			return true;
+	}
 }

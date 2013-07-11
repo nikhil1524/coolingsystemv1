@@ -13,11 +13,18 @@ import com.yeshtech.coolingsystem.util.DisplayMonitor;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class DataCenterLayoutWindow {
 
 	protected Shell shell;
 	private Text txtSupplyHeatIndex;
+	public int intRowNum;
+
+	public DataCenterLayoutWindow(int RowNum) {
+		this.intRowNum = RowNum;
+	}
 
 	/**
 	 * Launch the application.
@@ -26,7 +33,7 @@ public class DataCenterLayoutWindow {
 	 */
 	public static void main(String[] args) {
 		try {
-			DataCenterLayoutWindow window = new DataCenterLayoutWindow();
+			DataCenterLayoutWindow window = new DataCenterLayoutWindow(2);
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,10 +49,10 @@ public class DataCenterLayoutWindow {
 		shell.open();
 		shell.layout();
 
-		// setting display to center of screen
-		DisplayMonitor.getInstance(shell, display);
-		shell.setLocation(DisplayMonitor.getMonitorCenterXCoordinate(),
-				DisplayMonitor.getMonitorCenterYCoordinate());
+		DisplayMonitor dm = new DisplayMonitor(shell, display);
+		shell.setLocation(dm.getMonitorCenterXCoordinate(),
+				dm.getMonitorCenterYCoordinate());
+
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -74,6 +81,11 @@ public class DataCenterLayoutWindow {
 		Combo cmbRowNumber = new Combo(grpRowNumber, SWT.NONE);
 		cmbRowNumber.setBounds(10, 23, 394, 23);
 
+		System.out.println(intRowNum);
+		for (int i = 1; i <= intRowNum; i++) {
+			cmbRowNumber.add(new Integer(i).toString());
+		}
+
 		Group grpRackSpecification = new Group(shell, SWT.NONE);
 		grpRackSpecification
 				.setText(loader
@@ -84,6 +96,13 @@ public class DataCenterLayoutWindow {
 		cmbRackSpecification.setBounds(10, 23, 164, 23);
 
 		Button btnEditRack = new Button(grpRackSpecification, SWT.NONE);
+
+		btnEditRack.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				
+			}
+		});
 		btnEditRack.setBounds(180, 23, 75, 25);
 		btnEditRack.setText(loader
 				.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_EDIT_RACK));
@@ -95,6 +114,13 @@ public class DataCenterLayoutWindow {
 						.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_DELETE_RACK));
 
 		Button btnNewRack = new Button(grpRackSpecification, SWT.NONE);
+		btnNewRack.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				RackPropertiesWindow window = new RackPropertiesWindow();
+				window.open();
+			}
+		});
 		btnNewRack.setBounds(329, 23, 75, 25);
 		btnNewRack.setText(loader
 				.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_NEW_RACK));
@@ -109,6 +135,14 @@ public class DataCenterLayoutWindow {
 		txtSupplyHeatIndex.setBounds(183, 144, 76, 21);
 
 		Button btnCancel = new Button(shell, SWT.NONE);
+		btnCancel.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				shell.setVisible(false);
+				shell.dispose();
+				
+			}
+		});
 		btnCancel.setBounds(25, 188, 92, 37);
 		btnCancel.setText(loader
 				.getValue(LabelConstants.LAYOUT_DATA_CENTER_LAYOUT_CANCEL));

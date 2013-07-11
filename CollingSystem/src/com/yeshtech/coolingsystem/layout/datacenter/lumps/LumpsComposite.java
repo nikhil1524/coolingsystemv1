@@ -1,14 +1,12 @@
 package com.yeshtech.coolingsystem.layout.datacenter.lumps;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.Text;
 
 import com.yeshtech.coolingsystem.layout.datacenter.printedwindow.PrintedLumpWindow;
 import com.yeshtech.coolingsystem.layout.datacenter.printedwindow.PrintedPathWindow;

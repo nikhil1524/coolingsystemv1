@@ -16,10 +16,13 @@ import com.yeshtech.coolingsystem.util.DisplayMonitor;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class PostprocessingWindow {
 
 	protected Shell shell;
+	protected Composite composite;
 	private Text txtResultFileName;
 	private Text text_1;
 	private Text text_2;
@@ -49,9 +52,9 @@ public class PostprocessingWindow {
 		shell.open();
 		shell.layout();
 		// setting display to center of screen
-		DisplayMonitor.getInstance(shell, display);
-		shell.setLocation(DisplayMonitor.getMonitorCenterXCoordinate(),
-				DisplayMonitor.getMonitorCenterYCoordinate());
+		DisplayMonitor dm = new DisplayMonitor(shell,display);
+		shell.setLocation(dm.getMonitorCenterXCoordinate(),dm.getMonitorCenterYCoordinate());
+
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -83,12 +86,20 @@ public class PostprocessingWindow {
 		txtResultFileName.setBounds(120, 10, 76, 21);
 
 		Button btnLoadResults = new Button(shell, SWT.NONE);
+		btnLoadResults.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				composite.setVisible(true);
+			
+				
+			}
+		});
 		btnLoadResults.setBounds(209, 6, 101, 25);
 		btnLoadResults
 				.setText(loader
 						.getValue(LabelConstants.LAYOUT_POST_PROCESSING_WINDOW_LOAD_RESULTS));
 
-		Composite composite = new Composite(shell, SWT.NONE);
+		composite = new Composite(shell, SWT.NONE);
 		composite.setBounds(10, 60, 507, 275);
 
 		CTabFolder tabFolder = new CTabFolder(composite, SWT.BORDER);
@@ -96,6 +107,7 @@ public class PostprocessingWindow {
 		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(
 				SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 
+		
 		CTabItem tbtmDdd = new CTabItem(tabFolder, SWT.NONE);
 		tbtmDdd.setText(loader
 				.getValue(LabelConstants.LAYOUT_POST_PROCESSING_WINDOW_INPUT_PARAMETERS));
@@ -103,7 +115,8 @@ public class PostprocessingWindow {
 		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 		tbtmDdd.setControl(composite_1);
 		composite_1.setLayout(new FillLayout(SWT.HORIZONTAL));
-
+		tabFolder.setSelection(tbtmDdd);
+		
 		new Text(composite_1, SWT.BORDER);
 
 		CTabItem tbtmExergyDestruction = new CTabItem(tabFolder, SWT.NONE);
@@ -213,15 +226,25 @@ public class PostprocessingWindow {
 		text_4 = new Text(grpLoopMassFlow, SWT.BORDER);
 		text_4.setBounds(158, 57, 133, 21);
 
+		
+		
 		Button btnPlot = new Button(composite_4, SWT.NONE);
-		btnPlot.setBounds(377, 167, 86, 57);
+		btnPlot.setBounds(377, 167, 86, 40);
 		btnPlot.setText(loader
 				.getValue(LabelConstants.LAYOUT_POST_PROCESSING_WINDOW_PLOT));
 
 		Button btnClose = new Button(shell, SWT.NONE);
-		btnClose.setBounds(353, 353, 94, 37);
+		btnClose.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				shell.setVisible(false);
+				shell.dispose();
+			}
+		});
+		btnClose.setBounds(423, 357, 94, 37);
 		btnClose.setText(loader
 				.getValue(LabelConstants.LAYOUT_POST_PROCESSING_WINDOW_CLOSE));
+		composite.setVisible(false);
 
 	}
 }

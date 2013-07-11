@@ -12,6 +12,8 @@ import com.yeshtech.coolingsystem.util.DisplayMonitor;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class RunWindow {
 
@@ -42,9 +44,9 @@ public class RunWindow {
 		shell.open();
 		shell.layout();
 		// setting display to center of screen
-		DisplayMonitor.getInstance(shell, display);
-		shell.setLocation(DisplayMonitor.getMonitorCenterXCoordinate(),
-				DisplayMonitor.getMonitorCenterYCoordinate());
+		DisplayMonitor dm = new DisplayMonitor(shell,display);
+		shell.setLocation(dm.getMonitorCenterXCoordinate(),dm.getMonitorCenterYCoordinate());
+
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -83,10 +85,26 @@ public class RunWindow {
 						.getValue(LabelConstants.LAYOUT_RUN_WINDOW_OUTPUT_RESULTS_FILENAME));
 
 		Button btnGo = new Button(shell, SWT.NONE);
+		btnGo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				
+			PostprocessingWindow window = new PostprocessingWindow();
+			window.open();
+				
+			}
+		});
 		btnGo.setBounds(21, 123, 335, 46);
 		btnGo.setText(loader.getValue(LabelConstants.LAYOUT_RUN_WINDOW_GO));
 
 		Button btnClose = new Button(shell, SWT.NONE);
+		btnClose.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				shell.setVisible(false);
+				shell.dispose();
+			}
+		});
 		btnClose.setBounds(20, 183, 93, 25);
 		btnClose.setText(loader
 				.getValue(LabelConstants.LAYOUT_RUN_WINDOW_CLOSE));

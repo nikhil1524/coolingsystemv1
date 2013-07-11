@@ -8,6 +8,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+import com.yeshtech.coolingsystem.layout.window.PostprocessingWindow;
+import com.yeshtech.coolingsystem.layout.window.RunWindow;
 import com.yeshtech.coolingsystem.util.LabelConstants;
 import com.yeshtech.coolingsystem.util.PropertiesLoader;
 
@@ -52,11 +54,12 @@ public class CoolingSystemMain {
 	 */
 	protected void createContents() {
 
-		 loader = PropertiesLoader
+		loader = PropertiesLoader
 				.getPropertiesLoader("com.yeshtech.coolingsystem.util.layout-label");
 
 		shell = new Shell();
-		shell.setImage(SWTResourceManager.getImage(CoolingSystemMain.class, "/icon/App.ico"));
+		shell.setImage(SWTResourceManager.getImage(CoolingSystemMain.class,
+				"/icon/App.ico"));
 		shell.setSize(699, 415);
 		shell.setMaximized(true);
 		shell.setText(loader.getValue(LabelConstants.COOLING_CENTER));
@@ -112,10 +115,24 @@ public class CoolingSystemMain {
 		menuItemRun.setMenu(menu_3);
 
 		MenuItem mntmRun = new MenuItem(menu_3, SWT.NONE);
+		mntmRun.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				RunWindow window = new RunWindow();
+				window.open();
+			}
+		});
 		mntmRun.setText(loader
 				.getValue(LabelConstants.COOLING_CENTER_EXECUTE_RUN));
 
 		MenuItem menuItemPostProcess = new MenuItem(menu_3, SWT.NONE);
+		menuItemPostProcess.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				PostprocessingWindow window = new PostprocessingWindow();
+				window.open();
+			}
+		});
 		menuItemPostProcess.setText(loader
 				.getValue(LabelConstants.COOLING_CENTER_EXECUTE_POST_PROCESS));
 
